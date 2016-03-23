@@ -31,4 +31,14 @@ routes:
       redirect url
     except: halt getCurrentExceptionMsg()
 
+  post "/submit":
+    let
+      url = $(request.formData.getOrDefault "url").body
+      id = db.tryInsertID(sql"insert into urls values (null, ?, 0)", url)
+
+    if id == -1:
+      halt "already exists"
+
+    resp "https://cadey.cf/" & (id.int).encodeURLSimple()
+
 runForever()

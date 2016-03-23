@@ -9,4 +9,4 @@ bin           = @["surl"]
 
 # Dependencies
 
-requires "nim >= 0.13.1", "jester", "shorturl"
+requires "nim", "jester", "shorturl"
