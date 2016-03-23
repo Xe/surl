@@ -1,0 +1,8 @@
+{
+  "name": "surl",
+  "author": "xena",
+  "version": "0.0.0",
+  "language": "nim",
+  "issues_url": "https://git.xeserv.us/xena/surl",
+  "gx_version": "0.4.0"
+}
