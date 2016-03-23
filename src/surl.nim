@@ -39,6 +39,6 @@ routes:
     if id == -1:
       halt "already exists"
 
-    resp "https://cadey.cf/" & (id.int).encodeURLSimple()
+    resp "https://cadey.cf/" & (id.int).encodeURLSimple() & "\n"
 
 runForever()
