@@ -22,6 +22,10 @@ settings:
   bindAddr = "0.0.0.0"
 
 routes:
+  get "/":
+    const body = staticRead "index.html"
+    resp body
+
   get "/@id":
     try:
       let url = db.getValue(sql"select url from urls where id=?", (@"id").decodeURLSimple())
@@ -39,6 +43,6 @@ routes:
     if id == -1:
       halt "already exists"
 
-    resp "https://cadey.cf/" & (id.int).encodeURLSimple() & "\n"
+    resp "https://cadey.cf/" & (id.int).encodeURLSimple()
 
 runForever()
