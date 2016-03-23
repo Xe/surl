@@ -40,6 +40,8 @@ routes:
       url = $(request.formData.getOrDefault "url").body
       id = db.tryInsertID(sql"insert into urls values (null, ?, 0)", url)
 
+    echo url
+
     if id == -1:
       halt "already exists"
 

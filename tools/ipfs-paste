@@ -2,4 +2,4 @@
 
 url="https://ipfs.greedo.xeserv.us/ipfs/$(ipfs add | cut -d' ' -f2)"
 
-curl --form "url=$url" https://cadey.cf/submit -XPOST -v
+shorten $url
