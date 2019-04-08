@@ -41,4 +41,5 @@ some.clearnet.domain {
 
 ```
 nimble release
+nimble docker
 ```

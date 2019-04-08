@@ -15,5 +15,8 @@ task release, "release a new version of surl":
   exec "autotag"
   exec "git push"
   exec "git push --tags"
-  exec "docker build -t xena/surl:$(git describe --tags)"
-  exec "docker push xena/surl:$(git describe --tags)"
+
+task docker, "build and push docker image":
+  const version = staticExec "git describe --tags"
+  exec "docker build -t xena/surl:" & version & " ."
+  exec "docker push xena/surl:" & version
