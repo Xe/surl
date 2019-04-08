@@ -1,5 +1,5 @@
 #? stdtmpl(subsChar = '$', metaChar = '#')
-#proc genIndex(urls: seq[string]): string =
+#proc genIndex(urls: seq[string], version: string): string =
 #  result = ""
 <html>
   <head>
@@ -43,6 +43,8 @@
         <li><a href="$url">$url</a></li>
         #end for
       </ul>
+
+      <h6>version $version</h6>
     </main>
   </body>
 </html>

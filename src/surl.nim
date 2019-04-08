@@ -1,7 +1,7 @@
 import asyncdispatch, db_sqlite, jester, os, shorturl, strutils
 
 const
-  version = "indev"
+  version = staticExec "git describe --tags"
 
 include "./index.html"
 
@@ -30,7 +30,7 @@ routes:
     for x in db.fastRows(sql"select url from urls"):
       urls.add x[0]
 
-    resp genIndex(urls)
+    resp genIndex(urls, version)
 
   get "/@id":
     try:
