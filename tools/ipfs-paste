@@ -1,5 +1,0 @@
-#!/bin/bash
-
-url="https://ipfs.greedo.xeserv.us/ipfs/$(ipfs add | cut -d' ' -f2)"
-
-shorten $url
