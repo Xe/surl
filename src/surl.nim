@@ -6,6 +6,7 @@ const
 let
   dbPath = "DATABASE_PATH".getenv
   db = open(dbPath, "", "", "")
+  domain = "DOMAIN".getenv
 
 try:
   db.exec sql"""
@@ -42,6 +43,6 @@ routes:
     if id == -1:
       halt "already exists"
 
-    resp "https://go/" & (id.int).encodeURLSimple()
+    resp "https://" & domain & "/" & (id.int).encodeURLSimple()
 
 runForever()
