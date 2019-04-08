@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.4"
+version       = "0.1.5"
 author        = "Christine Dodrill"
 description   = "Exceptionally dumb URL shortener/forwarder"
 license       = "MIT"
