@@ -3,6 +3,8 @@ import asyncdispatch, db_sqlite, jester, os, shorturl, strutils
 const
   version = "indev"
 
+include "./index.html"
+
 let
   dbPath = "DATABASE_PATH".getenv
   db = open(dbPath, "", "", "")
@@ -23,8 +25,12 @@ settings:
 
 routes:
   get "/":
-    const body = staticRead "index.html"
-    resp body
+    var urls: seq[string] = newSeq[string]()
+
+    for x in db.fastRows(sql"select url from urls"):
+      urls.add x[0]
+
+    resp genIndex(urls)
 
   get "/@id":
     try:
