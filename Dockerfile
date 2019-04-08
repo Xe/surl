@@ -10,6 +10,6 @@ RUN apk -U add sqlite-libs
 VOLUME /data
 ENV DATABASE_PATH /data/surl.db
 ENV PORT 5000
-ENV DOMAIN go.akua
+ENV DOMAIN g.o
 EXPOSE 5000
 CMD /usr/local/bin/surl
