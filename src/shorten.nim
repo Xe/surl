@@ -5,7 +5,7 @@ for i in 1.countup(paramCount()):
   data["url"] = i.paramStr()
 
   try:
-    echo "https://cadey.cf/submit".postContent(multipart=data)
+    echo "https://go/submit".postContent(multipart=data)
 
   except:
     echo getCurrentExceptionMsg()

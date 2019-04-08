@@ -5,7 +5,7 @@ author        = "Christine Dodrill"
 description   = "Exceptionally dumb URL shortener/forwarder"
 license       = "MIT"
 srcDir        = "src"
-bin           = @["surl", "shorten"]
+bin           = @["shorten", "surl"]
 
 # Dependencies
 

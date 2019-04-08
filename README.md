@@ -1,4 +1,3 @@
-My useless URL shortener
-========================
+# surl
 
-This is really pointless, but I use it for pasting stuff into IPFS.
+My custom URL shortener. I have it mounted at https://go/.

@@ -4,15 +4,14 @@ const
   version = "indev"
 
 let
-  db = open("/home/xena/.local/within/surl/surl.db", nil, nil, nil)
+  dbPath = "DATABASE_PATH".getenv
+  db = open(dbPath, "", "", "")
 
 try:
   db.exec sql"""
-    create table if not exists urls
-    ( id INTEGER PRIMARY KEY
-    , url TEXT UNIQUE
-    , hits INTEGER
-    );
+    CREATE TABLE IF NOT EXISTS urls
+      ( url TEXT    UNIQUE
+      );
 """
 except:
   quit getCurrentExceptionMsg()
@@ -28,7 +27,7 @@ routes:
 
   get "/@id":
     try:
-      let url = db.getValue(sql"select url from urls where id=?", (@"id").decodeURLSimple())
+      let url = db.getValue(sql"select url from urls where rowid=?", (@"id").decodeURLSimple())
       if not url.contains(":"):
         halt "URL not found"
 
@@ -38,11 +37,11 @@ routes:
   post "/submit":
     let
       url = $(request.formData.getOrDefault "url").body
-      id = db.tryInsertID(sql"insert into urls values (null, ?, 0)", url)
+      id = db.tryInsertID(sql"insert into urls values (?)", url)
 
     if id == -1:
       halt "already exists"
 
-    resp "https://cadey.cf/" & (id.int).encodeURLSimple()
+    resp "https://go/" & (id.int).encodeURLSimple()
 
 runForever()
