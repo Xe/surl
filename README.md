@@ -23,6 +23,11 @@ docker run --name surl -dit -p 127.0.0.1:45273:5000 \
 # /etc/caddy/Caddyfile
 
 ## Custom DNS domain
+g.o:80 {
+  tls off
+  
+  redir / https://g.o
+}
 g.o:443 {
   tls /srv/within/certs/g.o/cert.pem /srv/within/certs/g.o/key.pem
   
