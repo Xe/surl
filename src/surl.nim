@@ -35,7 +35,7 @@ routes:
     resp genIndex(urls, version)
 
   get "/manifest.json":
-    resp Http200, genManifest(domain), "application/json"
+    resp Http200, genManifest(domain), "application/x-web-app-manifest+json; charset=UTF-8"
 
   get "/sw.js":
     const serviceWorker = staticRead "./sw.js"
