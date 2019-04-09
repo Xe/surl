@@ -7,7 +7,7 @@ FROM xena/alpine
 COPY --from=build /surl/shorten /usr/local/bin/shorten
 COPY --from=build /surl/surl    /usr/local/bin/surl
 WORKDIR /surl
-COPY ./public .
+COPY ./public ./public
 RUN apk -U add sqlite-libs
 VOLUME /data
 ENV DATABASE_PATH /data/surl.db
