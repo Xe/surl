@@ -14,7 +14,8 @@ body {
     color: #657b83;
 }
 
-a, a:active, a:visited { color: #586e75; }
+a { color: #b58900 }
+a:visited { color: #586e75; }
 
 @media (prefers-color-scheme: dark) {
     body {
@@ -22,5 +23,5 @@ a, a:active, a:visited { color: #586e75; }
         color: #839496;
     }
 
-    a, a:active, a:visited { color: #93a1a1; }
+    a:visited { color: #93a1a1; }
 }
