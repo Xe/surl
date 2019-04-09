@@ -15,7 +15,7 @@ To use this:
 ```
 docker volue create surl
 docker run --name surl -dit -p 127.0.0.1:45273:5000 \
-  -e DOMAIN=g.o -v surl:/data xena/surl:v0.1.5
+  -e DOMAIN=g.o -v surl:/data xena/surl:v0.2.13
 ```
 
 ## Serving
