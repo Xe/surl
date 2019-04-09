@@ -1,5 +1,5 @@
 #? stdtmpl(subsChar = '$', metaChar = '#')
-#proc genIndex(urls: seq[string], version: string): string =
+#proc genIndex(urls: seq[string], version: string, theme: string): string =
 #  result = ""
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,7 @@
     <title>URL shortener</title>
     <meta name="description" content="URL shortener" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/surl.css" />
+    <link rel="stylesheet" href="/css/$theme" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href="/pwa/icons/icon-512x512.png">
   </head>

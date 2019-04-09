@@ -11,6 +11,7 @@ let
   dbPath = "DATABASE_PATH".getenv
   db = open(dbPath, "", "", "")
   domain = "DOMAIN".getenv
+  theme = "THEME".getenv
 
 try:
   db.exec sql"""
@@ -32,7 +33,7 @@ routes:
     for x in db.fastRows(sql"select url from urls"):
       urls.add x[0]
 
-    resp genIndex(urls, version)
+    resp genIndex(urls, version, theme)
 
   get "/manifest.json":
     resp Http200, genManifest(domain), "application/x-web-app-manifest+json; charset=UTF-8"
@@ -63,6 +64,6 @@ routes:
     if request.headers.getOrDefault("X-API-Options") == "bare" or @"options" == "bare":
       resp to
     else:
-      resp genSuccess(url, to)
+      resp genSuccess(url, to, theme)
 
 runForever()

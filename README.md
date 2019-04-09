@@ -6,15 +6,16 @@ My custom URL shortener. I have it mounted at https://g.o/.
 
 To use this:
 
-| Environment Variable | Value           |
-| `DATABASE_PATH`      | `/data/surl.db` |
-| `DOMAIN`             | `g.o`           |
-| `PORT`               | `5000`          |
+| Environment Variable | Value                                                                                            |
+| `DATABASE_PATH`      | `/data/surl.db`                                                                                  |
+| `DOMAIN`             | `g.o`                                                                                            |
+| `PORT`               | `5000`                                                                                           |
+| `THEME`              | `solarized.css` (or `gruvbox.css`, put themes [here](https://github.com/Xe/surl/tree/master/public/css)) |
 
 ```
 docker volue create surl
 docker run --name surl -dit -p 127.0.0.1:45273:5000 \
-  -e DOMAIN=g.o -v surl:/data xena/surl:v0.1.5
+  -e DOMAIN=g.o -v surl:/data xena/surl:v0.
 ```
 
 ## Serving
@@ -47,4 +48,38 @@ some.clearnet.domain {
 ```
 nimble release
 nimble docker
+```
+
+## Customization
+
+Build your CSS on top of this example CSS:
+
+```css
+main {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 38rem;
+  padding: 2rem;
+  margin: auto;
+}
+
+body {
+  background: #fdf6e3;
+  color: #657b83;
+}
+
+// unclicked links
+a { color: #b58900 }
+
+// clicked links
+a:visited { color: #586e75; }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #002b36;
+    color: #839496;
+  }
+
+  // clicked links
+  a:visited { color: #93a1a1; }
+}
 ```
