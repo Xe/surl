@@ -7,6 +7,7 @@ My custom URL shortener. I have it mounted at https://g.o/.
 To use this:
 
 | Environment Variable | Value           |
+| :------------------- | :-------------- |
 | `DATABASE_PATH`      | `/data/surl.db` |
 | `DOMAIN`             | `g.o`           |
 | `PORT`               | `5000`          |
