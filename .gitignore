@@ -3,3 +3,4 @@ bin
 nimcache
 shorten
 surl.db
+.DS_Store

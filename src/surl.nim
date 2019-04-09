@@ -3,7 +3,9 @@ import asyncdispatch, db_sqlite, jester, os, shorturl, strutils
 const
   version = staticExec "git describe --tags"
 
-include "./index.html"
+include "./manifest.tmpl"
+include "./index.tmpl"
+include "./success.tmpl"
 
 let
   dbPath = "DATABASE_PATH".getenv
@@ -32,6 +34,13 @@ routes:
 
     resp genIndex(urls, version)
 
+  get "/manifest.json":
+    resp Http200, genManifest(domain), "application/json"
+
+  get "/sw.js":
+    const serviceWorker = staticRead "./sw.js"
+    resp Http200, serviceWorker, "application/javascript"
+
   get "/@id":
     try:
       let url = db.getValue(sql"select url from urls where rowid=?", (@"id").decodeURLSimple())
@@ -49,6 +58,11 @@ routes:
     if id == -1:
       halt "already exists"
 
-    resp "https://" & domain & "/" & (id.int).encodeURLSimple()
+    let to = "https://" & domain & "/" & (id.int).encodeURLSimple()
+
+    if request.headers.getOrDefault("X-API-Options") == "bare" or @"options" == "bare":
+      resp to
+    else:
+      resp genSuccess(url, to)
 
 runForever()

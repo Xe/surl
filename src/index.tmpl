@@ -5,36 +5,10 @@
   <head>
     <title>URL shortener</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-     main {
-       font-family: Arial, Helvetica, sans-serif;
-       max-width: 38rem;
-       padding: 2rem;
-       margin: auto;
-     }
-
-     h1 {
-       margin-bottom: .5rem;
-     }
-
-     body {
-       background: #fdf6e3;
-       color: #657b83;
-     }
-
-     a, a:active, a:visited { color: #586e75; }
-
-     @media (prefers-color-scheme: dark) {
-       body {
-         background: #002b36;
-         color: #839496;
-       }
-
-       a, a:active, a:visited { color: #93a1a1; }
-     }
-    </style>
+    <link rel="stylesheet" href="/css/surl.css">
+    <link rel="manifest" href="/pwa/manifest.json" />
   </head>
-  <body id="top">
+  <body>
     <main>
       <h1>URL Shortener</h1>
       <form method="POST" action="/submit" enctype="multipart/form-data">
@@ -51,5 +25,16 @@
 
       <h6>version $version</h6>
     </main>
+
+    <script>
+      if (navigator.serviceWorker.controller) {
+        console.log("Active service worker found, no need to register");
+      } else {
+        navigator.serviceWorker.register("/sw.js").then(function(reg) {
+          console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+      }
+    </script>
   </body>
 </html>
+#end proc

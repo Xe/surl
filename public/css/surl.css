@@ -1,0 +1,26 @@
+main {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 38rem;
+    padding: 2rem;
+    margin: auto;
+}
+
+h1 {
+    margin-bottom: .5rem;
+}
+
+body {
+    background: #fdf6e3;
+    color: #657b83;
+}
+
+a, a:active, a:visited { color: #586e75; }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #002b36;
+        color: #839496;
+    }
+
+    a, a:active, a:visited { color: #93a1a1; }
+}
