@@ -6,25 +6,12 @@ main {
 }
 
 body {
-  background: #fbd1c7;
-  color: #3c3836;
+  background: #282828;
+  color: #ebdbb2;
 }
 
-// purple
-a { color: #d3869b; }
-
-// dark purple
-a:visited { color: #b16286; }
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #282828;
-    color: #ebdbb2;
-  }
-
-  // purple
-  a { color: #8f3f71; }
-
-  // dark purple
-  a:visited { color: #b16286; }
+a {
+  background-color: #d79921;
+  color: inherit;
 }
+
