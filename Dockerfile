@@ -13,6 +13,7 @@ VOLUME /data
 ENV DATABASE_PATH /data/surl.db
 ENV PORT 5000
 ENV DOMAIN g.o
+ENV THEME gruvbox.css
 EXPOSE 5000
 CMD /usr/local/bin/surl
 
