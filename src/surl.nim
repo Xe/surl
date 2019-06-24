@@ -27,15 +27,10 @@ settings:
   bindAddr = "0.0.0.0"
 
 var
-  indexCounter = newCounterOnly("index", "number of times the index page is rendered")
-  errorCounter = newCounterOnly("errors", "number of times an error happened")
-  shortenHitCount = newCounterOnly("shorten_hits", "number of times a shortened URL is hit")
-  urlsSubmitted = newCounterOnly("urls_submitted", "number of urls submitted")
-
-globalRegistry.register indexCounter
-globalRegistry.register errorCounter
-globalRegistry.register shortenHitCount
-globalRegistry.register urlsSubmitted
+  indexCounter = newCounter("index", "number of times the index page is rendered")
+  errorCounter = newCounter("errors", "number of times an error happened")
+  shortenHitCount = newCounter("shorten_hits", "number of times a shortened URL is hit")
+  urlsSubmitted = newCounter("urls_submitted", "number of urls submitted")
 
 routes:
   get "/metrics":
