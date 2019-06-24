@@ -9,7 +9,7 @@ bin           = @["shorten", "surl"]
 
 # Dependencies
 
-requires "nim", "jester", "shorturl"
+requires "nim", "jester", "shorturl", "prometheus"
 
 task release, "release a new version of surl":
   exec "autotag"

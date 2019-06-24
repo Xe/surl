@@ -1,0 +1,2 @@
+--define: nimTypeNames
+--define: futureLogging

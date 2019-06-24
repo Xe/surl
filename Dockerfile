@@ -1,6 +1,7 @@
-FROM xena/nim:0.19.4 AS build
+FROM xena/nim:0.20.0 AS build
 WORKDIR /surl
 COPY . .
+RUN nim --version
 RUN yes | nimble build
 
 FROM xena/alpine

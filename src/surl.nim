@@ -1,4 +1,4 @@
-import asyncdispatch, db_sqlite, jester, os, shorturl, strutils
+import asyncdispatch, db_sqlite, jester, os, prometheus, shorturl, strutils
 
 const
   version = staticExec "git describe --tags"
@@ -26,13 +26,33 @@ settings:
   port = getEnv("PORT").parseInt().Port
   bindAddr = "0.0.0.0"
 
+var
+  indexCounter = newCounterOnly("index", "number of times the index page is rendered")
+  errorCounter = newCounterOnly("errors", "number of times an error happened")
+  shortenHitCount = newCounterOnly("shorten_hits", "number of times a shortened URL is hit")
+  urlsSubmitted = newCounterOnly("urls_submitted", "number of urls submitted")
+
+globalRegistry.register indexCounter
+globalRegistry.register errorCounter
+globalRegistry.register shortenHitCount
+globalRegistry.register urlsSubmitted
+
 routes:
+  get "/metrics":
+    let data = generateLatest()
+    resp Http200, data, "text/plain"
+
   get "/":
     var urls: seq[string] = newSeq[string]()
 
-    for x in db.fastRows(sql"select url from urls"):
-      urls.add x[0]
+    try:
+      for x in db.fastRows(sql"select url from urls"):
+        urls.add x[0]
+    except:
+      errorCounter.inc 1
+      halt getCurrentExceptionMsg()
 
+    indexCounter.inc 1
     resp genIndex(urls, version, theme)
 
   get "/manifest.json":
@@ -46,10 +66,14 @@ routes:
     try:
       let url = db.getValue(sql"select url from urls where rowid=?", (@"id").decodeURLSimple())
       if not url.contains(":"):
+        errorCounter.inc 1
         halt "URL not found"
 
+      shortenHitCount.inc 1
       redirect url
-    except: halt getCurrentExceptionMsg()
+    except:
+      errorCounter.inc 1
+      halt getCurrentExceptionMsg()
 
   post "/submit":
     let
@@ -57,6 +81,7 @@ routes:
       id = db.tryInsertID(sql"insert into urls values (?)", url)
 
     if id == -1:
+      errorCounter.inc 1
       halt "already exists"
 
     let to = "https://" & domain & "/" & (id.int).encodeURLSimple()
